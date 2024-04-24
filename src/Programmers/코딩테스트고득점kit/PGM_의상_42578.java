@@ -37,6 +37,7 @@ public class PGM_의상_42578 {
 
             // 모두 안 입는 경우는 없으니까 - 1
             answer -= 1;
+
             return answer;
         }
     }
