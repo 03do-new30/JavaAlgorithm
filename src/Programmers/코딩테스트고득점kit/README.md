@@ -8,3 +8,4 @@
 | 전화번호 목록    | [PGM_전화번호목록_42577](PGM_전화번호목록_42577.java) | 2024.04.24 | 해시 | HashMap의 contains는 시간복잡도 O(1)                                      |
 | 의상         | [PGM_의상_42578](PGM_의상_42578.java) | 2024.04.24 | 해시 | HashMap                                                            |
 | 베스트앨범      | [PGM_베스트앨범_42579](PGM_베스트앨범_42579.java) | 2024.04.24 | 해시 | 복잡한 구조의 HashMap, Collections.sort(), **ArrayList를 array로** 변환하는 방법 |
+| K번째 수      | [PGM_K번째수_42748](PGM_K번째수_42748.java) | 2024.04.24 | 정렬 | Collections.sort와 ArrayList를 int[]배열로 반환하는 방법                      |

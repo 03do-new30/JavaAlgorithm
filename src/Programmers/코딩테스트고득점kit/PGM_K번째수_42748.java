@@ -1,0 +1,48 @@
+package Programmers.코딩테스트고득점kit;
+
+import java.sql.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
+public class PGM_K번째수_42748 {
+    public static void main(String[] args) {
+        int[][] array = {{1, 5, 2, 6, 3, 7, 4}};
+        int[][][] commands = {{{2, 5, 3}, {4, 4, 1}, {1, 7, 3}}};
+        int[][] result = {{5, 6, 3}};
+
+        Solution sol = new Solution();
+
+        for (int i = 0; i < result.length; i ++) {
+            System.out.println(
+                    Arrays.equals(
+                        sol.solution(array[i], commands[i]), result[i])
+            );
+        }
+
+    }
+
+    static class Solution {
+        public int[] solution(int[] array, int[][] commands) {
+            List<Integer> answer = new ArrayList<>();
+
+            for (int[] command : commands) {
+                int i = command[0];
+                int j = command[1];
+                int k = command[2];
+                ArrayList<Integer> subArray = new ArrayList<>();
+                for (int idx = i-1 ; idx < j; idx ++) {
+                    subArray.add(array[idx]);
+                }
+                // 배열 정렬
+                Collections.sort(subArray);
+//                System.out.println("subArray = " + subArray);
+
+                // k번째 숫자를 저장
+                answer.add(subArray.get(k-1));
+            }
+            return answer.stream().mapToInt(i -> i).toArray();
+        }
+    }
+}
