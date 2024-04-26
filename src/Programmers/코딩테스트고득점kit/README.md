@@ -10,4 +10,4 @@
 | 베스트앨범      | [PGM_베스트앨범_42579](PGM_베스트앨범_42579.java) | 2024.04.24 | 해시 | 복잡한 구조의 HashMap, Collections.sort(), **ArrayList를 array로** 변환하는 방법 |
 | K번째 수      | [PGM_K번째수_42748](PGM_K번째수_42748.java) | 2024.04.24 | 정렬 | Collections.sort와 ArrayList를 int[]배열로 반환하는 방법                      |
 | 가장 큰 수     | [PGM_가장큰수_42746](PGM_가장큰수_42746.java) | 2024.04.24 | 정렬 | Arrays.sort()와 String.join, String.valueOf                         |
-
+| 같은 숫자는 싫어   | [PGM_같은_숫자는_싫어_12906](PGM_같은_숫자는_싫어_12906.java) | 2024.04.26 | 스택 | Stack 활용법 숙지                                                       |
