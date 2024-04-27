@@ -10,25 +10,27 @@ public class PGM_타겟_넘버_43165 {
             System.out.println(sol.solution(numbers[i], target[i]) == result[i]);
         }
     }
-}
-class Solution {
-    int answer = 0;
 
-    public int solution(int[] numbers, int target) {
-        solve(numbers, target, 0, 0);
-        return answer;
-    }
+    static class Solution {
+        int answer = 0;
 
-    public void solve(int[] numbers, int target, int idx, int sumResult) {
-        if (idx == numbers.length) {
-            if (sumResult == target)
-                answer++;
-            return;
+        public int solution(int[] numbers, int target) {
+            solve(numbers, target, 0, 0);
+            return answer;
         }
-        // +numbers[idx]
-        solve(numbers, target, idx + 1, sumResult + numbers[idx]);
-        // -numbers[idx]
-        solve(numbers, target, idx + 1, sumResult - numbers[idx]);
+
+        public void solve(int[] numbers, int target, int idx, int sumResult) {
+            if (idx == numbers.length) {
+                if (sumResult == target)
+                    answer++;
+                return;
+            }
+            // +numbers[idx]
+            solve(numbers, target, idx + 1, sumResult + numbers[idx]);
+            // -numbers[idx]
+            solve(numbers, target, idx + 1, sumResult - numbers[idx]);
+        }
     }
 }
+
 
