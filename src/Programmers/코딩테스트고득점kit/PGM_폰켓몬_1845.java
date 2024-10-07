@@ -15,15 +15,13 @@ public class PGM_폰켓몬_1845 {
 
     static class Solution {
         public int solution(int[] nums) {
-            int answer = 0;
             int pick = nums.length / 2;
             HashSet<Integer> hashSet = new HashSet<>();
-            for (int n: nums) {
-                hashSet.add(n);
+            for(int num : nums) {
+                hashSet.add(num);
             }
-            if (pick >= hashSet.size()) answer = hashSet.size();
-            else answer = pick;
-            return answer;
+            if (pick >= hashSet.size()) return hashSet.size();
+            return pick;
         }
     }
 }
