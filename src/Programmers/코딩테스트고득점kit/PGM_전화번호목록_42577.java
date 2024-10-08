@@ -1,6 +1,7 @@
 package Programmers.코딩테스트고득점kit;
 
-import java.util.HashMap;
+import java.util.Arrays;
+import java.util.HashSet;
 
 public class PGM_전화번호목록_42577 {
     public static void main(String[] args) {
@@ -19,20 +20,24 @@ public class PGM_전화번호목록_42577 {
     static class Solution {
         public boolean solution(String[] phone_book) {
 
-            HashMap<String, Integer> map = new HashMap<>();
-            for (int i = 0; i < phone_book.length; i++) {
-                map.put(phone_book[i], i); // 전화번호 : 인덱스
-            }
+            // 전화번호들을 hashSet에 추가
+            HashSet<String> hashSet = new HashSet<>(Arrays.asList(phone_book));
 
+            // 시간복잡도: 1,000,000 * 20
             for (int i = 0; i < phone_book.length; i++) {
-                // 전화번호의 길이만큼 순회
-                for (int j = 0; j < phone_book[i].length(); j++) {
-                    // 어떤 번호가 다른 번호의 접두어인 경우가 있으면 false
-                    // map.containsKey로 탐색하므로 시간 단축
-                    if (map.containsKey(phone_book[i].substring(0, j))) {
+
+                // 번호가 한글자인 경우, 패스한다.
+                if (phone_book[i].length() == 1) {
+                    continue;
+                }
+                // 어떤 번호의 접두어가 hashSet에 존재하는지 확인한다.
+                for (int j = 1; j < phone_book[i].length(); j++) {
+                    String head = phone_book[i].substring(0, j);
+                    if (hashSet.contains(head)) {
                         return false;
                     }
                 }
+                hashSet.add(phone_book[i]);
             }
             return true;
         }
