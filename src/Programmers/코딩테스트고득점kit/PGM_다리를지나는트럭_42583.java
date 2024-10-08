@@ -21,36 +21,46 @@ public class PGM_다리를지나는트럭_42583 {
     // 참고: https://velog.io/@cyj2825/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4-%EB%8B%A4%EB%A6%AC%EB%A5%BC-%EC%A7%80%EB%82%98%EB%8A%94-%ED%8A%B8%EB%9F%AD-Java%EC%9E%90%EB%B0%94
     static class Solution {
         public int solution(int bridge_length, int weight, int[] truck_weights) {
-            int answer = 0;
 
-            // 길이가 bridge_length인 큐를 생성한다
-            Queue<Integer> q = new LinkedList<>();
+            Queue<Integer> bridge = new LinkedList<>();
+            // bridge_length만큼 0을 추가해준다.
             for (int i = 0; i < bridge_length; i++) {
-                q.add(0);
+                bridge.offer(0);
             }
-            // 다리 길이가 1이거나 트럭의 개수가 1인 경우
-            if (bridge_length == 1) return truck_weights.length + 1;
-            if (truck_weights.length == 1) return bridge_length + 1;
+            Queue<Integer> trucks = new LinkedList<>();
+            for (int truck : truck_weights) {
+                trucks.offer(truck);
+            }
 
-            int idx = 0;
-            // 현재 다리에 있는 트럭의 무게
-            int curWeight = 0;
-            // 트럭의 개수만큼 반복
-            while (idx < truck_weights.length) {
-                // 현재 다리에 존재하는 맨 앞 트럭의 무게를 뺀다
-                curWeight -= q.poll();
-                answer++; // 새로운 트럭을 넣는다
+            int arrived = 0; // 도착한 트럭 대수
+            int time = 0; // 걸린 시간
+            int curWeight = 0; // 다리 위에 올라가있는 현재 무게
 
-                // 현재 다리에 있는 트럭 무게와 들어올 트럭 무게 합과 weight 비교
-                if (curWeight + truck_weights[idx] <= weight) {
-                    q.offer(truck_weights[idx]);
-                    curWeight += truck_weights[idx++];
-                } else {
-                    q.offer(0); // 견딜 수 있는 무게보다 커지면 0을 넣음
+            while (arrived < truck_weights.length) {
+                // System.out.println("time:" + time);
+                // System.out.println("arrived:" + arrived);
+                // System.out.println("bridge:" + bridge);
+                // System.out.println("trucks:" + trucks);
+                // System.out.println("-----");
+
+                // 1. 다리를 한 칸 당긴다
+                int polled = bridge.poll();
+                if (polled > 0) {
+                    curWeight -= polled;
+                    arrived ++;
                 }
+                // 2. 새로운 차가 다리 위에 올라갈 수 있는지 확인한다.
+                if (!trucks.isEmpty() && curWeight + trucks.peek() <= weight) {
+                    int nextTruck = trucks.poll();
+                    bridge.offer(nextTruck);
+                    curWeight += nextTruck;
+                } else {
+                    bridge.offer(0);
+                }
+                time++;
             }
-            // 마지막 트럭까지 다리를 건너는 값을 구하기 위해 + bridge_length
-            return answer + bridge_length;
+
+            return time;
         }
     }
 }
