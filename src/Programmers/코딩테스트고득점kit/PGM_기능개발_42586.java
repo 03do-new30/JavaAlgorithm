@@ -15,43 +15,30 @@ public class PGM_기능개발_42586 {
     }
     static class Solution {
         public int[] solution(int[] progresses, int[] speeds) {
-            List<Integer> answer = new ArrayList<>();
-            // 완료될 때까지 걸리는 기간
-            int[] times = new int[progresses.length];
-            for (int i = 0; i < progresses.length; i ++) {
-                int tmp = (int) Math.ceil((100.0 - progresses[i]) / speeds[i]);
-                times[i] = tmp;
+            ArrayList<Integer> answer = new ArrayList<>();
+
+            Stack<Integer> jobs = new Stack<>();
+            for (int i = progresses.length - 1; i >= 0; i--) {
+                jobs.push(i);
             }
 
-            Stack<Integer> stack = new Stack<>();
-            int maxTime = 0;
-            for (int i = 0; i < times.length; i++ ) {
-                if (i == 0) {
-                    maxTime = times[i];
-                    stack.push(times[i]);
-                    continue;
+            int day = 0;
+            while (!jobs.isEmpty()) {
+                for (int i = 0; i < progresses.length; i++) {
+                    progresses[i] += speeds[i];
                 }
-                if (times[i] <= maxTime) {
-                    stack.push(times[i]);
-                } else {
-                    maxTime = times[i];
-                    int cnt = 0;
-                    while (!stack.isEmpty()) {
-                        stack.pop();
-                        cnt ++;
-                    }
-                    stack.add(times[i]);
-                    answer.add(cnt);
+                int done = 0;
+                while (!jobs.isEmpty() && progresses[jobs.peek()] >= 100) {
+                    jobs.pop();
+                    done++;
                 }
+
+                if (done > 0) {
+                    answer.add(done);
+                }
+                day++;
             }
-            int cnt = 0;
-            while (!stack.isEmpty()) {
-                stack.pop();
-                cnt ++;
-            }
-            if (cnt > 0)
-                answer.add(cnt);
-            return answer.stream().mapToInt(i->i).toArray();
+            return answer.stream().mapToInt(i -> i).toArray();
         }
     }
 }
