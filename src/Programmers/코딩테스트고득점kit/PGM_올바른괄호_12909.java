@@ -17,20 +17,18 @@ public class PGM_올바른괄호_12909 {
     static class Solution {
         boolean solution(String s) {
 
-            Stack<Character> stack = new Stack<>();
+            Stack<Character> left = new Stack<>();
 
             for (int i = 0; i < s.length(); i++) {
-                char tmp = s.charAt(i);
-                if (tmp == '(') {
-                    stack.push(tmp);
+                if (s.charAt(i) == '(') {
+                    left.push('(');
                 } else {
-                    if (stack.isEmpty())
-                        return false;
-                    stack.pop();
+                    if (left.isEmpty()) return false;
+                    left.pop();
                 }
             }
 
-            return stack.isEmpty();
+            return left.isEmpty();
         }
     }
 }
