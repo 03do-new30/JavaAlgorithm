@@ -25,24 +25,17 @@ public class PGM_K번째수_42748 {
 
     static class Solution {
         public int[] solution(int[] array, int[][] commands) {
-            List<Integer> answer = new ArrayList<>();
-
-            for (int[] command : commands) {
+            int[] answer = new int[commands.length];
+            for (int idx = 0; idx < commands.length; idx++) {
+                int[] command = commands[idx];
                 int i = command[0];
                 int j = command[1];
                 int k = command[2];
-                ArrayList<Integer> subArray = new ArrayList<>();
-                for (int idx = i-1 ; idx < j; idx ++) {
-                    subArray.add(array[idx]);
-                }
-                // 배열 정렬
-                Collections.sort(subArray);
-//                System.out.println("subArray = " + subArray);
-
-                // k번째 숫자를 저장
-                answer.add(subArray.get(k-1));
+                int[] newArray = Arrays.copyOfRange(array, i-1, j);
+                Arrays.sort(newArray);
+                answer[idx] = newArray[k-1];
             }
-            return answer.stream().mapToInt(i -> i).toArray();
+            return answer;
         }
     }
 }
