@@ -10,7 +10,7 @@
 | 베스트앨범      | [PGM_베스트앨범_42579](PGM_베스트앨범_42579.java) | 2024.10.08 | 해시 | 복잡한 구조의 HashMap, Collections.sort(),                                        |
 |            |                                  |            |   | **ArrayList를 array로** 변환하는 방법                                               |
 | K번째 수      | [PGM_K번째수_42748](PGM_K번째수_42748.java) | 2024.10.10 | 정렬 | Collections.sort와 ArrayList를 int[]배열로 반환하는 방법 + (10/10풀이)Arrays.copyOfRange |
-| 가장 큰 수     | [PGM_가장큰수_42746](PGM_가장큰수_42746.java) | 2024.04.24 | 정렬 | Arrays.sort()와 String.join, String.valueOf                                  |
+| 가장 큰 수     | [PGM_가장큰수_42746](PGM_가장큰수_42746.java) | 2024.10.10 | 정렬 | Arrays.sort()와 String.join, String.valueOf                                  |
 | 같은 숫자는 싫어  | [PGM_같은_숫자는_싫어_12906](PGM_같은_숫자는_싫어_12906.java) | 2024.10.08 | 스택 | Stack 활용법 숙지                                                                |
 | 기능 개발      | [PGM_기능개발_42586](PGM_기능개발_42586.java) | 2024.10.08 | 스택 | Stack 활용법 숙지                                                                |
 | 올바른 괄호     | [PGM_올바른괄호_12909](PGM_올바른괄호_12909.java) | 2024.10.08 | 스택 | String.charAt(i)                                                            |                                                  
