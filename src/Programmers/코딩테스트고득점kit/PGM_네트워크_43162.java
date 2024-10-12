@@ -20,34 +20,30 @@ public class PGM_네트워크_43162 {
     static class Solution {
         public int solution(int n, int[][] computers) {
             int answer = 0;
+
             boolean[] visited = new boolean[n];
             for (int i = 0; i < n; i++) {
-                visited[i] = false;
-            }
-            for (int i = 0; i < n; i++) {
                 if (!visited[i]) {
-                    bfs(i, computers, visited);
+                    bfs(i, n, computers, visited);
                     answer++;
                 }
             }
+
             return answer;
         }
 
-        public void bfs(int computer, int[][] computers, boolean[] visited) {
-            int n = visited.length;
+        private void bfs(int i, int n, int[][] computers, boolean[] visited){
             Queue<Integer> q = new LinkedList<>();
-            q.add(computer);
-            visited[computer] = true;
-            while (!q.isEmpty()) {
-                int current = q.poll();
-                for (int i = 0; i < n; i++) {
-                    if (i == current)
-                        continue;
-                    if (computers[current][i] == 1) {
-                        if (visited[i])
-                            continue;
-                        visited[i] = true;
-                        q.add(i);
+            q.offer(i);
+            visited[i] = true;
+
+            while(!q.isEmpty()) {
+                int node = q.poll();
+                for (int nextNode = 0; nextNode < n; nextNode++) {
+                    if (node == nextNode) continue;
+                    if (computers[node][nextNode] == 1 && !visited[nextNode]) {
+                        q.offer(nextNode);
+                        visited[nextNode] = true;
                     }
                 }
             }
