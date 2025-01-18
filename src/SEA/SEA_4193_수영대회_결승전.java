@@ -1,4 +1,4 @@
-package SWEA;
+package SEA;
 
 import java.util.*;
 
