@@ -1,4 +1,4 @@
-package Programmers.코딩테스트고득점kit;
+package PGM.코딩테스트고득점kit;
 
 import java.util.*;
 public class PGM_다리를지나는트럭_42583 {

@@ -1,4 +1,4 @@
-package Programmers.코딩테스트고득점kit;
+package PGM.코딩테스트고득점kit;
 
 public class PGM_전력망을둘로나누기_86971 {
     public static void main(String[] args) {

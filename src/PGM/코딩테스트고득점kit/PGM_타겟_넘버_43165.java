@@ -1,4 +1,4 @@
-package Programmers.코딩테스트고득점kit;
+package PGM.코딩테스트고득점kit;
 
 public class PGM_타겟_넘버_43165 {
     public static void main(String[] args) {
