@@ -77,7 +77,6 @@ public class  BOJ_11067_모노톤길{
                 bw.write(points.get(tmp[i]) + "\n");
             }
         }
-
         br.close();
         bw.flush();
         bw.close();
