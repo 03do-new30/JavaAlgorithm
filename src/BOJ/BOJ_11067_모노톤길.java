@@ -80,5 +80,6 @@ public class  BOJ_11067_모노톤길{
         br.close();
         bw.flush();
         bw.close();
+
     }
 }
