@@ -4,7 +4,8 @@ import java.io.*;
 import java.util.*;
 
 public class BOJ_1486_등산 {
-    private static class Node {
+
+    private static class Node implements Comparable<Node>{
         int r;
         int c;
         int weight;
@@ -17,6 +18,11 @@ public class BOJ_1486_등산 {
         public String toString() {
             return "(" + r + ", " + c + ", time:" + weight + ")";
         }
+
+        @Override
+        public int compareTo(Node o) {
+            return Integer.compare(this.weight, o.weight);
+        }
     }
 
     private static int N;
@@ -27,6 +33,7 @@ public class BOJ_1486_등산 {
     private static int[] dr = {0, 0, -1, 1};
     private static int[] dc = {-1, 1, 0, 0};
     private static final int INF = Integer.MAX_VALUE;
+    private static List<List<Node>> graph;
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -50,8 +57,8 @@ public class BOJ_1486_등산 {
             }
         }
 
-        // 세준이가 다녀올 수 있는 "가장 높은 곳"의 높이를 반환한다.
-        List<List<Node>> graph = new ArrayList<>();
+        // 인접리스트 생성
+        graph = new ArrayList<>();
         for (int i = 0; i < N * M; i++) {
             graph.add(new ArrayList<>());
         }
@@ -67,6 +74,11 @@ public class BOJ_1486_등산 {
                         continue;
                     }
 
+                    // 높이의 차이가 T보다 크지 않은 곳으로만 다닐 수 있다.
+                    if (Math.abs(arr[nr][nc] - arr[r][c]) > T) {
+                        continue;
+                    }
+
                     int time;
                     if (arr[r][c] >= arr[nr][nc]) {
                         time = 1;
@@ -74,34 +86,63 @@ public class BOJ_1486_등산 {
                         time = (int)Math.pow(arr[nr][nc] - arr[r][c], 2);
                     }
 
-                    if (time <= T) {
-                        graph.get(index).add(new Node(nr, nc, time));
-                    }
+                    graph.get(index).add(new Node(nr, nc, time));
                 }
 
             }
         }
 
-        for (List<Node> x : graph) {
-            bw.write(x + "\n");
-        }
+        // 시작점 0에서 각 점까지의 최단거리
+        int[] dist = dijkstra(new Node(0, 0, 0));
 
-        // (0, 0)에서 도달할 수 있는 mountain의 위치를 저장한다.
-        int[][] dist = new int[N*M][N*M];
-        for (int i = 0; i < N*M; i++) {
-            for (int j = 0; j < N*M; j++) {
-                dist[i][j] = INF;
+        // 시작점에서 최단경로가 존재하는 정점 중, 제한 시간 내에 다시 시작점으로 돌아올 수 있는 경우
+        int highest = arr[0][0];
+        for (int mountain = 1; mountain < N*M; mountain++) {
+            if (dist[mountain] != INF) {
+                int mountC = mountain % M;
+                int mountR = mountain / M;
+
+                if (highest >= arr[mountR][mountC]) continue;
+
+                int[] backDist = dijkstra(new Node(mountR, mountC, 0));
+                if (dist[mountain] + backDist[0] <= D) {
+                    highest = arr[mountR][mountC];
+                }
             }
         }
-        dist[0][0] = 0;
-        PriorityQueue<Node> pq = new PriorityQueue<>((node1, node2) -> Integer.compare(node1.weight, node2.weight));
 
-        for (int mountain = 1; mountain < N*M; mountain++) {
-
-        }
+        bw.write(highest + "\n");
 
         br.close();
         bw.flush();
         bw.close();
+    }
+
+    private static int[] dijkstra(Node start) {
+        int[] dist = new int[N * M];
+        Arrays.fill(dist, INF);
+
+        int startIdx = start.r * M + start.c;
+        dist[startIdx]= 0;
+
+        PriorityQueue<Node> pq = new PriorityQueue<>();
+        pq.offer(start);
+
+        while (!pq.isEmpty()) {
+            Node node = pq.poll();
+            int nodeIdx = node.r * M + node.c;
+
+            List<Node> nextNodes = graph.get(nodeIdx);
+            for (Node nextNode : nextNodes) {
+                int nextIdx = nextNode.r * M + nextNode.c;
+                int nextDist = dist[nodeIdx] + nextNode.weight;
+                if (nextDist < dist[nextIdx]) {
+                    dist[nextIdx] = nextDist;
+                    pq.offer(new Node(nextNode.r, nextNode.c, nextDist));
+                }
+            }
+        }
+
+        return dist;
     }
 }
