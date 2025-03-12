@@ -1,7 +1,7 @@
 import java.util.*;
 import java.io.*;
 
-public class BOJ_5427_ºÒ {
+public class BOJ_5427_ë¶ˆ {
 	static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 	static int h, w;
 	static char[][] arr;
@@ -13,7 +13,7 @@ public class BOJ_5427_ºÒ {
 		int T = Integer.parseInt(br.readLine());
 		for (int tc = 1; tc <= T; tc++) {
 			input();
-			setFireTime(); // ºÒÀÌ ¹øÁö´Â ½Ã°£À» ±â·ÏÇÑ´Ù.
+			setFireTime();
 			int result = bfs();
 			System.out.println(result > -1 ? result : "IMPOSSIBLE");
 		}
@@ -42,12 +42,10 @@ public class BOJ_5427_ºÒ {
 				int nr = r + dr[i];
 				int nc = c + dc[i];
 				if (nr < 0 || nr >= h || nc < 0 || nc >= w) {
-					// Å»Ãâ
 					return time[r][c] + 1;
 				}
 				if (arr[nr][nc] != '.') { continue; }
 				if (time[nr][nc] > -1) { continue; }
-				// ºÒÀÌ ¹øÁø ½Ã°£º¸´Ù ÀÛ¾Æ¾ß ÇØ´ç Ä­À¸·Î ÀÌµ¿ÇÒ ¼ö ÀÖ´Ù.
 				if (fireTime[nr][nc] == -1 || fireTime[nr][nc] > time[r][c] + 1) {
 					time[nr][nc] = time[r][c] + 1;
 					q.offer(new int[] {nr, nc});
@@ -57,7 +55,7 @@ public class BOJ_5427_ºÒ {
 		return -1;
 	}
 	
-	static void setFireTime( ) { // ºÒÀÌ ¹øÁö´Â ½Ã°£À» ±â·ÏÇÑ´Ù.
+	static void setFireTime( ) {
 		fireTime = new int[h][w];
 		Queue<int[]> q = new ArrayDeque<>();
 		for (int i = 0; i < h; i++) {
