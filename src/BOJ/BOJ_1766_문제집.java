@@ -1,7 +1,7 @@
 import java.util.*;
 import java.io.*;
 
-public class Main {
+public class BOJ_1766_문제집 {
 	static int N, M;
 	static int[] indegree;
 	static List<Integer> result;

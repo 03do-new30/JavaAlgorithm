@@ -1,7 +1,7 @@
 import java.util.*;
 import java.io.*;
 
-public class Main {
+public class BOJ_2533_사회망_서비스 {
 	static int N;
 	static List<Integer>[] graph;
 	static boolean[] visited;

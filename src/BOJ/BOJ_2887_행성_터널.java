@@ -1,7 +1,7 @@
 import java.util.*;
 import java.io.*;
 
-public class Main {
+public class BOJ_2887_행성_터널 {
 	
 	static int N;
 	static Planet[] planets;
